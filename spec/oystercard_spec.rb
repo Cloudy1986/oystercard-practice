@@ -38,25 +38,17 @@ describe Oystercard do
     it 'returns false when the oystercard has not been touched in' do
       expect(subject).to_not be_in_journey
     end
-
-    #Test for touched in card
-
-    #Test for touched out card
-  end
-
-  describe '#touch_in' do
-    it 'changes journey_status of an oystercard to true' do
-      expect(subject.touch_in).to eq true
+    
+    it 'returns true when the oystercard has been touched in' do
+      subject.touch_in
       expect(subject).to be_in_journey
     end
+
+    it 'returns false when the oystercard has been touched in and touched out' do
+      subject.touch_in
+      subject.touch_out
+      expect(subject).to_not be_in_journey
+    end
   end
-
-  # describe '#touch_out' do
-  #   it 'changes journey_status of an oystercard to false' do
-  #     expect(subject.touch_in).to eq true
-  #     expect(subject).to be_in_journey
-  #   end
-  # end
-
 
 end

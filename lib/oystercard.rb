@@ -28,4 +28,8 @@ class Oystercard
     @journey_in_progress = true
   end
 
+  def touch_out
+    @journey_in_progress = false
+  end
+
 end
