@@ -21,4 +21,17 @@ describe Oystercard do
     end
   end
 
+  describe "deduct" do
+    it 'decreases the balance attribute of an oystercard by the value of the argument passed to it' do
+      subject.top_up(50)
+      expect { subject.deduct(5)}.to change { subject.balance }.by -5
+    end
+
+    it 'raises an error if the balance would fall below the minimum balance of 0' do
+      min_balance = Oystercard::MIN_BALANCE
+      expect{ subject.deduct(50) }.to raise_error "Insufficient funds for this journey. Please top up your oystercard"
+    end
+
+  end
+
 end
