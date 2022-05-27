@@ -4,11 +4,11 @@ class Oystercard
   MIN_BALANCE = 0
   MIN_FARE = 1
 
-  attr_reader :balance, :journey_in_progress
+  attr_reader :balance, :in_journey
 
-  def initialize(balance=0, journey_in_progress=false)
+  def initialize(balance=0, in_journey=false)
     @balance = balance
-    @journey_in_progress = journey_in_progress
+    @in_journey = in_journey
   end
 
   def top_up(amount)
@@ -22,16 +22,16 @@ class Oystercard
   end
 
   def in_journey?
-    @journey_in_progress
+    @in_journey
   end
 
   def touch_in
     fail "Insufficient funds to touch in. Please top up your oystercard" if @balance < MIN_FARE
-    @journey_in_progress = true
+    @in_journey = true
   end
 
   def touch_out
-    @journey_in_progress = false
+    @in_journey = false
   end
 
 end

@@ -6,7 +6,7 @@ describe Oystercard do
     it 'initializes an oystercard object with a balance attribute of zero and a journey status of false' do
       expect(subject).to be_a Oystercard
       expect(subject.balance).to eq 0
-      expect(subject.journey_in_progress).to eq false
+      expect(subject.in_journey).to eq false
     end
   end
 
