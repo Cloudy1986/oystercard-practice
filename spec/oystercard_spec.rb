@@ -30,7 +30,7 @@ describe Oystercard do
 
     it 'raises an error if the balance would fall below the minimum balance of 0' do
       min_balance = Oystercard::MIN_BALANCE
-      expect{ subject.deduct(50) }.to raise_error "Insufficient funds for this journey. Please top up your oystercard"
+      expect{ subject.deduct(50) }.to raise_error "Insufficient funds. Please top up your oystercard"
     end
   end
 
@@ -40,14 +40,27 @@ describe Oystercard do
     end
     
     it 'returns true when the oystercard has been touched in' do
+      subject.top_up(50)
       subject.touch_in
       expect(subject).to be_in_journey
     end
 
     it 'returns false when the oystercard has been touched in and touched out' do
+      subject.top_up(50)
       subject.touch_in
       subject.touch_out
       expect(subject).to_not be_in_journey
+    end
+  end
+
+  describe '#touch_in' do
+    it 'raises an error if the oystercard has insufficient funds for the minimum fare' do
+      expect { subject.touch_in }.to raise_error "Insufficient funds. Please top up your oystercard"
+    end
+
+    it 'does not raise an error if the oystercard has funds greater than the minimum fare' do
+      subject.top_up(50)
+      expect { subject.touch_in }.not_to raise_error
     end
   end
 

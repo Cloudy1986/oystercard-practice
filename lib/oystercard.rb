@@ -2,6 +2,7 @@ class Oystercard
 
   MAX_BALANCE = 90
   MIN_BALANCE = 0
+  MIN_FARE = 1
 
   attr_reader :balance, :journey_in_progress
 
@@ -16,7 +17,7 @@ class Oystercard
   end
 
   def deduct(amount)
-    fail "Insufficient funds for this journey. Please top up your oystercard" if @balance - amount < MIN_BALANCE
+    fail "Insufficient funds. Please top up your oystercard" if @balance - amount < MIN_BALANCE
     @balance -= amount
   end
 
@@ -25,6 +26,7 @@ class Oystercard
   end
 
   def touch_in
+    fail "Insufficient funds. Please top up your oystercard" if @balance < MIN_FARE
     @journey_in_progress = true
   end
 
