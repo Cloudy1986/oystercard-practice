@@ -9,4 +9,12 @@ describe Oystercard do
     end
   end
 
+  describe "top_up" do
+    it 'adds the value of the argument to the balance' do
+      oystercard = subject
+      oystercard.top_up(50)     
+      expect(oystercard.balance).to eq 50
+    end
+  end
+
 end
