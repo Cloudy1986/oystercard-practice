@@ -6,7 +6,7 @@ describe Oystercard do
     it 'initializes an oystercard object with a balance attribute of zero and a journey status of false' do
       expect(subject).to be_a Oystercard
       expect(subject.balance).to eq 0
-      expect(subject.journey_status).to eq false
+      expect(subject.journey_in_progress).to eq false
     end
   end
 
@@ -36,7 +36,7 @@ describe Oystercard do
 
   describe '#in_journey' do
     it 'returns false when the oystercard has not been touched in' do
-    expect(subject).to_not be_in_journey
+      expect(subject).to_not be_in_journey
     end
 
     #Test for touched in card
@@ -44,6 +44,19 @@ describe Oystercard do
     #Test for touched out card
   end
 
+  describe '#touch_in' do
+    it 'changes journey_status of an oystercard to true' do
+      expect(subject.touch_in).to eq true
+      expect(subject).to be_in_journey
+    end
+  end
+
+  # describe '#touch_out' do
+  #   it 'changes journey_status of an oystercard to false' do
+  #     expect(subject.touch_in).to eq true
+  #     expect(subject).to be_in_journey
+  #   end
+  # end
 
 
 end
