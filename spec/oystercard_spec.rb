@@ -55,7 +55,7 @@ describe Oystercard do
 
   describe '#touch_in' do
     it 'raises an error if the oystercard has insufficient funds for the minimum fare' do
-      expect { subject.touch_in }.to raise_error "Insufficient funds. Please top up your oystercard"
+      expect { subject.touch_in }.to raise_error "Insufficient funds to touch in. Please top up your oystercard"
     end
 
     it 'does not raise an error if the oystercard has funds greater than the minimum fare' do

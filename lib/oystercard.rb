@@ -26,7 +26,7 @@ class Oystercard
   end
 
   def touch_in
-    fail "Insufficient funds. Please top up your oystercard" if @balance < MIN_FARE
+    fail "Insufficient funds to touch in. Please top up your oystercard" if @balance < MIN_FARE
     @journey_in_progress = true
   end
 
