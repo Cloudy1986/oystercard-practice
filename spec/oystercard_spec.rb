@@ -22,18 +22,6 @@ describe Oystercard do
     end
   end
 
-  describe "#deduct" do
-    it 'decreases the balance attribute of an oystercard by the value of the argument passed to it' do
-      subject.top_up(50)
-      expect { subject.deduct(5)}.to change { subject.balance }.by -5
-    end
-
-    it 'raises an error if the balance would fall below the minimum balance of 0' do
-      min_balance = Oystercard::MIN_BALANCE
-      expect{ subject.deduct(50) }.to raise_error "Insufficient funds. Please top up your oystercard"
-    end
-  end
-
   describe '#in_journey' do
     it 'returns false when the oystercard has not been touched in' do
       expect(subject).to_not be_in_journey
@@ -61,6 +49,14 @@ describe Oystercard do
     it 'does not raise an error if the oystercard has funds greater than the minimum fare' do
       subject.top_up(50)
       expect { subject.touch_in }.not_to raise_error
+    end
+  end
+
+  describe '#touch_out' do
+    it 'deducts the minimum fare from the oystercard balance' do
+      subject.top_up(50)
+      subject.touch_in
+      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MIN_FARE)
     end
   end
 
